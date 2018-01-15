@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.GridLayoutManager
+import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -64,7 +65,14 @@ class EventDetails : AppCompatActivity() {
         ed_about.visibility = View.VISIBLE
         ed_recyclerView.visibility = View.INVISIBLE
 
-        ed_about.setText("About :"+resources.getString(R.string.lorem), TextView.BufferType.EDITABLE)
+        //ed_about.setText("About :"+resources.getString(R.string.lorem), TextView.BufferType.EDITABLE)
+
+        val bodyData = resources.getString(R.string.lorem2)//"<h2>Title</h2><br><p>Description here</p>"
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            ed_about.setText(Html.fromHtml(bodyData, Html.FROM_HTML_MODE_COMPACT ))
+        } else {
+            ed_about.setText(Html.fromHtml(bodyData))
+        }
     }
 
     private fun details() {

@@ -3,7 +3,9 @@ package org.ignus.ignus18.ui.fragments.eventCategories
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +29,8 @@ class EDTechnical : Fragment() {
 
 
         TechnicalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type=="3" })
-        TechnicalEventCategoryList.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        TechnicalEventCategoryList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        //TechnicalEventCategoryList.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
     }
 
 }

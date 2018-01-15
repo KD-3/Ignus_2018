@@ -17,7 +17,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activities.OnStartActivity"
-            android:theme="@style/FullScreen" />
+            android:theme="@style/FullScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activities.LoginActivity"
             android:theme="@style/FullScreen" />
@@ -25,12 +32,6 @@
             android:name=".ui.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activities.EventList" android:theme="@style/FullScreen" />
         <activity android:name=".ui.activities.EventDetails"/>

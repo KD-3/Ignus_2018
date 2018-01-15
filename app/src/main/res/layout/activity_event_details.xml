@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.ignus.ignus18.ui.fragments.EventDetails">
+    tools:context="org.ignus.ignus18.ui.activities.EventDetails">
 
     <ImageView
         android:id="@+id/ed_logo"
@@ -63,6 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"
+        android:textAlignment="gravity"
         android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/ed_recyclerView"

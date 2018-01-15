@@ -3,7 +3,9 @@ package org.ignus.ignus18.ui.fragments.eventCategories
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +29,7 @@ class EDCultural : Fragment() {
 
 
         CulturalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type == "1" })
-        CulturalEventCategoryList.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        CulturalEventCategoryList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        //CulturalEventCategoryList.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
     }
 }
