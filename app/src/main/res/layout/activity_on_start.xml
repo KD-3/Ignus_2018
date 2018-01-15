@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/FullScreen"
+    tools:context="org.ignus.ignus18.ui.activities.OnStartActivity">
+
+    <!--Splash Screen-->
+    <FrameLayout
+        android:id="@+id/layout_splash_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grdnt"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/a1_splashImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="72dp"
+            android:src="@drawable/ic_ignus_logo" />
+    </FrameLayout>
+
+    <!--Notification Access Screen-->
+    <RelativeLayout
+        android:id="@+id/layout_notification_access"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFF"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/a1_ignus_logo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#FFEB3B"
+            android:padding="24dp"
+            android:src="@drawable/ic_ignus_logo" />
+
+        <TextView
+            android:id="@+id/temp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/a1_ignus_logo"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Ignus Notifications"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/temp1"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/lorem"
+            tools:text="@tools:sample/lorem/random" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#757575">
+
+            <Button
+                android:id="@+id/a1_yes"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Yes"
+                android:textColor="#00BCD4" />
+
+            <Button
+                android:id="@+id/a1_no"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/a1_yes"
+                android:text="No"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--Login/Register Screen-->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_login_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/temp1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#88809b"
+            android:padding="72dp"
+            android:src="@drawable/ic_ignus_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/a1_register"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/temp1"
+            android:elevation="2dp"
+            android:text="Register"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/a1_login"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/a1_login"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/temp1"
+            android:elevation="2dp"
+            android:text="Login"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/a1_register" />
+
+        <TextView
+            android:id="@+id/a1_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:text="Skip>>"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

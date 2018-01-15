@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="70dp"
+    android:background="#FDFDFD">
+    <ImageView
+        android:id="@+id/edo_avatar"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="12dp"
+        android:background="#FDFDFD"
+        android:src="#000" />
+    <LinearLayout
+        android:id="@+id/dummy1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/edo_avatar"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/edo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abhinav Suthar"
+            android:textColor="#111"/>
+        <TextView
+            android:id="@+id/edo_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+917240505099"
+            android:textColor="#111"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@+id/edo_avatar"
+        android:layout_alignBottom="@+id/dummy1"
+        android:layout_alignTop="@+id/dummy1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+        <View
+            android:id="@+id/d"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/edo_call"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:src="@drawable/ic_phone_call" />
+        <ImageView
+            android:id="@+id/edo_whatsApp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:src="@drawable/ic_whatsapp" />
+        <ImageView
+            android:id="@+id/edo_email"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:src="@drawable/ic_email" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="69.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#222"/>
+</RelativeLayout>

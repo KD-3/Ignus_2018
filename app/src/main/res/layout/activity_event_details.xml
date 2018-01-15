@@ -1,0 +1,74 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.ignus.ignus18.ui.fragments.EventDetails">
+
+    <ImageView
+        android:id="@+id/ed_logo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#546854"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/ed_tabs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="2"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/ed_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ed_logo"
+        app:layout_constraintEnd_toEndOf="@+id/ed_logo"
+        app:layout_constraintStart_toStartOf="@+id/ed_logo"
+        app:layout_constraintTop_toTopOf="@+id/ed_logo"
+        android:text="Event Name"
+        android:textSize="48sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/ed_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5254"
+        app:layout_constraintBottom_toTopOf="@+id/ed_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_logo"
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ed_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="visible"
+        tools:listitem="@layout/temp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_tabs"
+        app:layout_constraintVertical_weight="3" />
+
+    <EditText
+        android:id="@+id/ed_about"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ed_recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/ed_recyclerView"
+        app:layout_constraintTop_toTopOf="@+id/ed_recyclerView"
+        tools:text="@tools:sample/lorem/random" />
+
+</android.support.constraint.ConstraintLayout>
