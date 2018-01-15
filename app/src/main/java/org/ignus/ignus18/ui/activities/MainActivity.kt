@@ -27,8 +27,7 @@ import org.ignus.ignus18.ui.fragments.Home
 class MainActivity : AppCompatActivity() {
 
     private var navItemIndex = 0
-    // tags used to attach the fragments
-    private val fragTag = arrayOf("Home", "Event Details", "Registered Event", "Contacts", "FAQs", "Sponsors", "About Us", "Developers")
+    private val fragTag = arrayOf("Home", "Event Details", "Registered Event", "Contacts", "FAQs", "Sponsors", "About Us", "Developers")    // tags used to attach the fragments
     private var currentTag = fragTag[0]
     private var tempCurTag = currentTag
 
@@ -43,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         handleNavigationMenuClickEvents(nav_view) // Navigation menu click events
     }
 
-    //--------------------------------------------------------------------------------------------//
     private fun initialize() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar) // Setting up toolbar
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         actionBarDrawerToggle.syncState()
     }
 
-    //--------------------------------------------------------------------------------------------//
     private fun setUpNavHeader() {  // Navigation view header
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)

@@ -10,12 +10,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.frag_event_categories.*
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.EventCategory
 import org.ignus.ignus18.domain.commands.RequestEventCategoryCommand
-import org.ignus.ignus18.domain.model.EventCategoryList
 import org.ignus.ignus18.ui.activities.MainActivity
 import org.ignus.ignus18.ui.fragments.eventCategories.EDCultural
 import org.ignus.ignus18.ui.fragments.eventCategories.EDFlagship
@@ -26,26 +24,21 @@ import org.jetbrains.anko.uiThread
 
 class EventCategories : Fragment() {
 
+    companion object {
+        lateinit var resultList: List<EventCategory>
+    }
+
     private val cultural by lazy { EDCultural() }
     private val technical by lazy { EDTechnical() }
     private val flagship by lazy { EDFlagship() }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
-                loadCurrentFragment(cultural)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                loadCurrentFragment(technical)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                loadCurrentFragment(flagship)
-                return@OnNavigationItemSelectedListener true
-            }
+            R.id.navigation_home -> loadCurrentFragment(cultural)
+            R.id.navigation_dashboard -> loadCurrentFragment(technical)
+            R.id.navigation_notifications -> loadCurrentFragment(flagship)
         }
-        false
+        true
     }
 
 
@@ -63,27 +56,18 @@ class EventCategories : Fragment() {
         val dialog = ProgressDialog(context)
         dialog.setMessage("Please wait...")
         dialog.setCancelable(false)
+
+        val task = doAsync {
+            resultList = RequestEventCategoryCommand().execute().eventCategories
+            uiThread { dialog.dismiss(); loadCurrentFragment(cultural) }
+        }
+
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", { _, _ ->
+            task.cancel(true)
             dialog.dismiss()
             (activity as MainActivity).loadFragment()
         })
         dialog.show()
-
-        doAsync {
-
-            val eventCategories: List<EventCategory>? = RequestEventCategoryCommand().execute().eventCategories
-
-            uiThread {
-                dialog.dismiss()
-                if (eventCategories == null || eventCategories.isEmpty()) {
-                    (activity as MainActivity).loadFragment()
-                    Toast.makeText(context, "Connect to working Internet!!!", Toast.LENGTH_LONG).show()
-                } else {
-                    loadCurrentFragment(cultural)
-                    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-                }
-            }
-        }
     }
 
     private fun loadCurrentFragment(fragment: Fragment) {

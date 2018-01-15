@@ -20,8 +20,8 @@ class EventCategoryListAdapter(private val eventCategories: List<EventCategory>)
         RecyclerView.Adapter<EventCategoryListAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cover: ImageView? = view.findViewById(R.id.frag_ed_cover)
-        val title: TextView? = view.findViewById(R.id.frag_ed_title)
+        val cover: ImageView = view.findViewById(R.id.frag_ed_cover)
+        val title: TextView = view.findViewById(R.id.frag_ed_title)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,11 +33,11 @@ class EventCategoryListAdapter(private val eventCategories: List<EventCategory>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        Glide.with(holder.cover?.context!!)
+        Glide.with(holder.cover.context)
                 .load(eventCategories[position].cover)
                 .into(holder.cover)
 
-        holder.title?.text = eventCategories[position].name
+        holder.title.text = eventCategories[position].name
         holder.cover.transitionName = "transition" + position
 
         holder.cover.setOnClickListener({
@@ -46,8 +46,7 @@ class EventCategoryListAdapter(private val eventCategories: List<EventCategory>)
             intent.putExtra("parent_type", eventCategories[position].parent_type)
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(holder.cover.context as MainActivity,
-                    holder.cover,
-                    "transition" + position)
+                    holder.cover, "transition" + position)
 
             holder.cover.context.startActivity(intent, options.toBundle())
         })

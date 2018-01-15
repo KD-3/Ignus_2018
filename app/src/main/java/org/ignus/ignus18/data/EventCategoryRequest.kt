@@ -53,7 +53,7 @@ class EventCategoryRequest {
 
     @Throws(InterruptedException::class, IOException::class)
     private fun isConnected(): Boolean {
-        val command = "ping -c 1 google.com"
+        val command = "ping -c 1 ignus.org"
         return Runtime.getRuntime().exec(command).waitFor() == 0
     }
 }

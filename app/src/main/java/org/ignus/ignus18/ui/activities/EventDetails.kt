@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_event_details.*
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.adapters.EventOrganiserListAdapter
+import org.ignus.ignus18.ui.fragments.EventCategories
+import java.util.*
 
 class EventDetails : AppCompatActivity() {
 
@@ -29,8 +31,8 @@ class EventDetails : AppCompatActivity() {
         about() //Load about for first time
         tabClickEventListener() // Tab event click listener
 
-        Glide.with(this).load(EventList.resultList[0].events[0].cover_url).into(ed_logo)
-        ed_title.text = EventList.resultList[0].events[0].name
+        Glide.with(this).load(EventCategories.resultList[Random().nextInt(2)].events[Random().nextInt(3)].cover_url).into(ed_logo)
+        ed_title.text = EventCategories.resultList[Random().nextInt(2)].events[Random().nextInt(3)].name
     }
 
     private fun tab() {
@@ -38,8 +40,7 @@ class EventDetails : AppCompatActivity() {
         ed_tabs.addTab(ed_tabs.newTab().setText("About"))
         ed_tabs.addTab(ed_tabs.newTab().setText("Details"))
         ed_tabs.addTab(ed_tabs.newTab().setText("Organisers"))
-        // Set the tabs to fill the entire layout.
-        ed_tabs.tabGravity = TabLayout.GRAVITY_FILL
+        ed_tabs.tabGravity = TabLayout.GRAVITY_FILL // Set the tabs to fill the entire layout.
 
         ed_about.keyListener = null
     }
@@ -65,23 +66,24 @@ class EventDetails : AppCompatActivity() {
 
         ed_about.setText("About :"+resources.getString(R.string.lorem), TextView.BufferType.EDITABLE)
     }
+
     private fun details() {
         ed_about.visibility = View.VISIBLE
         ed_recyclerView.visibility = View.INVISIBLE
 
         ed_about.setText("Details :"+resources.getString(R.string.lorem), TextView.BufferType.EDITABLE)
     }
+
     private fun organisers() {
         ed_about.visibility = View.INVISIBLE
         ed_recyclerView.visibility = View.VISIBLE
 
-        ed_recyclerView.adapter = EventOrganiserListAdapter(EventList.resultList[0].events[0].organiser_list)
+        ed_recyclerView.adapter = EventOrganiserListAdapter(EventCategories.resultList[0].events[0].organiser_list)
         ed_recyclerView.layoutManager = GridLayoutManager(this, 1)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId==55) super.onBackPressed()
-        Log.d("Suthar", item?.itemId.toString())
+        if (item?.itemId==16908332) super.onBackPressed()
         return super.onOptionsItemSelected(item)
     }
 }

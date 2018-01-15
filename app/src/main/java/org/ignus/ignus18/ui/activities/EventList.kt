@@ -2,7 +2,6 @@ package org.ignus.ignus18.ui.activities
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
@@ -13,29 +12,14 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_event_list.*
-import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.Event
-import org.ignus.ignus18.data.EventCategory
-import org.ignus.ignus18.data.EventCategoryResult
 import org.ignus.ignus18.ui.adapters.EventListAdapter
+import org.ignus.ignus18.ui.fragments.EventCategories
 
 
 class EventList : AppCompatActivity() {
-
-    companion object {
-        val resultList = EventCategoryResult(getDataClassFromJSON(getLocalJSON())).list
-        private fun getLocalJSON(): String {
-            val sp = PreferenceManager.getDefaultSharedPreferences(App.instance.applicationContext)
-            return sp.getString("theJSON", "default json")
-        }
-        private fun getDataClassFromJSON(JsonStr: String): List<EventCategory> {
-            return Gson().fromJson(JsonStr, object : TypeToken<List<EventCategory>>() {}.type)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +30,7 @@ class EventList : AppCompatActivity() {
         val parentType = intent.getStringExtra("parent_type")
 
         el_backdrop.transitionName = "transition" + index
-        val list = resultList.filter { it.parent_type == parentType }
+        val list = EventCategories.resultList.filter { it.parent_type == parentType }
 
         Glide.with(this)
                 .load(list[index].cover)
