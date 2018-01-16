@@ -47,7 +47,8 @@ class EventListAdapter(private val eventList: List<Event>) :
 
     private fun showFullDetails(position: Int) {
         val intent = Intent(App.instance, EventDetails::class.java)
-        intent.putExtra("eventID", eventList[position].unique_id)
+        intent.putExtra("index", position)
+        intent.putExtra("eventId", eventList[position].unique_id)
         App.instance.startActivity(intent)
     }
 

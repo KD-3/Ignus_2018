@@ -57,3 +57,23 @@ class EventCategoryRequest {
         return Runtime.getRuntime().exec(command).waitFor() == 0
     }
 }
+
+class EventDetailRequest {
+
+    fun execute(eventId: String): EventDetail {
+        val apiUrl = "https://ignus.org/api/event/$eventId/detail/?format=json"
+        val eventDetailJson: String
+        if (isConnected())
+            eventDetailJson = URL(apiUrl).readText()
+        else {
+            eventDetailJson = "{\"url\":\"/\",\"about\":\"error\",\"details\":\"error\",\"pdf\":\"error\"}"
+            doAsync { uiThread { Toast.makeText(App.instance, "Server/Internet error -> Outdated Data", Toast.LENGTH_LONG).show() } }
+        }
+        return Gson().fromJson(eventDetailJson, EventDetail::class.java)
+    }
+
+    private fun isConnected(): Boolean {
+        val command = "ping -c 1 ignus.org"
+        return Runtime.getRuntime().exec(command).waitFor() == 0
+    }
+}

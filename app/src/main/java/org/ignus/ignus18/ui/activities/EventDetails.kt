@@ -1,5 +1,7 @@
 package org.ignus.ignus18.ui.activities
 
+import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -8,32 +10,70 @@ import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_event_details.*
 import org.ignus.ignus18.R
+import org.ignus.ignus18.data.EventDetail
+import org.ignus.ignus18.domain.commands.RequestEventDetailCommand
 import org.ignus.ignus18.ui.adapters.EventOrganiserListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
-import java.util.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class EventDetails : AppCompatActivity() {
+
+    companion object {
+        var catPosition = 0
+        var parentType = "0"
+    }
+
+    private var data: EventDetail = EventDetail("error", "error", "error", "error")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
 
-        val eventID = intent.getStringExtra("eventID")
-        Log.d("Suthar", eventID)
+        val index = intent.getIntExtra("index", 0)
 
-        supportActionBar?.title = "Event Details"
+
+        val event = EventCategories.resultList.filter { it.parent_type == parentType }[catPosition].events[index]
+
+
+        setSupportActionBar(ed_toolbar)
+        supportActionBar?.title = event.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        tab()   // Set the text for each tab.
-        about() //Load about for first time
-        tabClickEventListener() // Tab event click listener
 
-        Glide.with(this).load(EventCategories.resultList[Random().nextInt(2)].events[Random().nextInt(3)].cover_url).into(ed_logo)
-        ed_title.text = EventCategories.resultList[Random().nextInt(2)].events[Random().nextInt(3)].name
+        Glide.with(this).load(event.cover_url).into(ed_logo)
+
+
+        tab()
+        getEventData(event.unique_id)
+
+    }
+
+    private fun getEventData(eventId: String) {
+
+        val dialog = ProgressDialog(this)
+        dialog.setMessage("Please wait...")
+        dialog.setCancelable(false)
+
+        val task = doAsync {
+            data = RequestEventDetailCommand().execute(eventId)
+            uiThread {
+                about()
+                dialog.dismiss()
+                Log.d("Suthar", ""+data.pdf)
+                Log.d("Suthar", ""+data.url)
+            }
+        }
+
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", { _, _ ->
+            task.cancel(true)
+            dialog.dismiss()
+        })
+        dialog.show()
     }
 
     private fun tab() {
@@ -44,6 +84,8 @@ class EventDetails : AppCompatActivity() {
         ed_tabs.tabGravity = TabLayout.GRAVITY_FILL // Set the tabs to fill the entire layout.
 
         ed_about.keyListener = null
+
+        tabClickEventListener()
     }
 
     private fun tabClickEventListener() {
@@ -51,35 +93,27 @@ class EventDetails : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> about()
-                    1 -> details()
+                    1 -> about('D')
                     2 -> organisers()
                     else -> about()
                 }
             }
+
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
     }
 
-    private fun about() {
+    private fun about(type: Char = 'A') {
         ed_about.visibility = View.VISIBLE
         ed_recyclerView.visibility = View.INVISIBLE
 
-        //ed_about.setText("About :"+resources.getString(R.string.lorem), TextView.BufferType.EDITABLE)
 
-        val bodyData = resources.getString(R.string.lorem2)//"<h2>Title</h2><br><p>Description here</p>"
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            ed_about.setText(Html.fromHtml(bodyData, Html.FROM_HTML_MODE_COMPACT ))
-        } else {
-            ed_about.setText(Html.fromHtml(bodyData))
-        }
-    }
+        val bodyData = if (type == 'A') data.about else data.details
 
-    private fun details() {
-        ed_about.visibility = View.VISIBLE
-        ed_recyclerView.visibility = View.INVISIBLE
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) ed_about.text = Html.fromHtml(bodyData, Html.FROM_HTML_MODE_COMPACT)
+        else ed_about.text = Html.fromHtml(bodyData)
 
-        ed_about.setText("Details :"+resources.getString(R.string.lorem), TextView.BufferType.EDITABLE)
     }
 
     private fun organisers() {
@@ -91,7 +125,7 @@ class EventDetails : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId==16908332) super.onBackPressed()
+        if (item?.itemId == 16908332) super.onBackPressed()
         return super.onOptionsItemSelected(item)
     }
 }

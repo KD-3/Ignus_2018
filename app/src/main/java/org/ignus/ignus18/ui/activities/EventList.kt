@@ -49,6 +49,8 @@ class EventList : AppCompatActivity() {
         setSupportActionBar(el_toolbar)
         el_collapsingToolbar.title = list[index].name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        EventDetails.catPosition = index
+        EventDetails.parentType = parentType
 
         loadView(list[index].events)
 
