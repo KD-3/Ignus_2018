@@ -1,19 +1,19 @@
 package org.ignus.ignus18.ui.fragments.eventCategories
 
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.frag_edcultural.*
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
+import org.ignus.ignus18.ui.utils.SpacesItemDecoration
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationLand
 
 
 class EDCultural : Fragment() {
@@ -29,7 +29,13 @@ class EDCultural : Fragment() {
 
 
         CulturalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type == "1" })
-        CulturalEventCategoryList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        //CulturalEventCategoryList.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 3)
+            CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
+        } else {
+            CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 2)
+            CulturalEventCategoryList.addItemDecoration(SpacesItemDecoration(16))
+        }
     }
 }

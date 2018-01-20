@@ -13,6 +13,8 @@ import org.ignus.ignus18.data.EventCategory
 import org.ignus.ignus18.ui.activities.EventList
 import org.ignus.ignus18.ui.utils.ctx
 import android.support.v4.app.ActivityOptionsCompat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import org.ignus.ignus18.ui.activities.MainActivity
 
 
@@ -35,6 +37,7 @@ class EventCategoryListAdapter(private val eventCategories: List<EventCategory>)
 
         Glide.with(holder.cover.context)
                 .load(eventCategories[position].cover)
+                .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.cover)
 
         holder.title.text = eventCategories[position].name

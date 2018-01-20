@@ -26,7 +26,10 @@ import org.ignus.ignus18.ui.fragments.Home
 
 class MainActivity : AppCompatActivity() {
 
-    private var navItemIndex = 0
+    companion object {
+        private var navItemIndex = 0
+    }
+
     private val fragTag = arrayOf("Home", "Event Details", "Registered Event", "Contacts", "FAQs", "Sponsors", "About Us", "Developers")    // tags used to attach the fragments
     private var currentTag = fragTag[0]
     private var tempCurTag = currentTag
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
         initialize() // Toolbar
-        loadFragment() // I mean home fragment
+        loadFragment(navItemIndex) // I mean home fragment
         setUpNavHeader() // Navigation bar header items
         handleNavigationMenuClickEvents(nav_view) // Navigation menu click events
     }
@@ -154,8 +157,8 @@ class MainActivity : AppCompatActivity() {
 
     fun loadFragment(index: Int = 0) {
         navItemIndex = index
-        loadCurrentFragment()
         currentTag = fragTag[index]
+        loadCurrentFragment()
         supportActionBar?.title = currentTag
         nav_view.setCheckedItem(R.id.nav_home)
     }

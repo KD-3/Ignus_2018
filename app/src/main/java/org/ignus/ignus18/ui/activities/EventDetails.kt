@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.GridLayoutManager
 import android.text.Html
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
@@ -19,6 +18,9 @@ import org.ignus.ignus18.ui.adapters.EventOrganiserListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import android.content.Intent
+import android.net.Uri
+
 
 class EventDetails : AppCompatActivity() {
 
@@ -26,8 +28,9 @@ class EventDetails : AppCompatActivity() {
         var catPosition = 0
         var parentType = "0"
     }
+    private val dialog by lazy { ProgressDialog(this) }
 
-    private var data: EventDetail = EventDetail("error", "error", "error", "error")
+    private var data: EventDetail = EventDetail("https://ignus.org", "error", "error", "null")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,17 +58,16 @@ class EventDetails : AppCompatActivity() {
 
     private fun getEventData(eventId: String) {
 
-        val dialog = ProgressDialog(this)
+
         dialog.setMessage("Please wait...")
         dialog.setCancelable(false)
 
         val task = doAsync {
             data = RequestEventDetailCommand().execute(eventId)
             uiThread {
+                more()
                 about()
                 dialog.dismiss()
-                Log.d("Suthar", ""+data.pdf)
-                Log.d("Suthar", ""+data.url)
             }
         }
 
@@ -88,6 +90,20 @@ class EventDetails : AppCompatActivity() {
         tabClickEventListener()
     }
 
+    private fun more() {
+
+        ed_moreDetails.setOnClickListener({
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://ignus.org${data.url}")))
+        })
+
+        if (data.pdf != null && data.pdf != "null") {
+            ed_pdf.visibility = View.VISIBLE
+            ed_pdf.setOnClickListener({
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.pdf)))
+            })
+        }
+    }
+
     private fun tabClickEventListener() {
         ed_tabs.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -98,7 +114,6 @@ class EventDetails : AppCompatActivity() {
                     else -> about()
                 }
             }
-
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
@@ -106,7 +121,7 @@ class EventDetails : AppCompatActivity() {
 
     private fun about(type: Char = 'A') {
         ed_about.visibility = View.VISIBLE
-        ed_recyclerView.visibility = View.INVISIBLE
+        ed_recyclerView.visibility = View.GONE
 
 
         val bodyData = if (type == 'A') data.about else data.details
@@ -117,7 +132,7 @@ class EventDetails : AppCompatActivity() {
     }
 
     private fun organisers() {
-        ed_about.visibility = View.INVISIBLE
+        ed_about.visibility = View.GONE
         ed_recyclerView.visibility = View.VISIBLE
 
         ed_recyclerView.adapter = EventOrganiserListAdapter(EventCategories.resultList[0].events[0].organiser_list)

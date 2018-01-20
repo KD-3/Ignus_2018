@@ -27,6 +27,7 @@ class EventCategories : Fragment() {
     companion object {
         lateinit var resultList: List<EventCategory>
     }
+    private val dialog by lazy { ProgressDialog(context) }
 
     private val cultural by lazy { EDCultural() }
     private val technical by lazy { EDTechnical() }
@@ -53,7 +54,6 @@ class EventCategories : Fragment() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        val dialog = ProgressDialog(context)
         dialog.setMessage("Please wait...")
         dialog.setCancelable(false)
 

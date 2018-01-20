@@ -67,5 +67,6 @@
                  <p>Actual content goes here.....</p>
               </div>
     </string>
+    <string name="register_event">Register Event</string>
 
 </resources>

@@ -75,7 +75,7 @@ class OnStartActivity : AppCompatActivity() {
         layout_notification_access.visibility = View.GONE
 
         a1_register.setOnClickListener({
-
+            startActivity(Intent(this, RegisterActivity::class.java))
         })
 
         a1_login.setOnClickListener({

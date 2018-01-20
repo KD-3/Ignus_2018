@@ -6,13 +6,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.Event
 import org.ignus.ignus18.ui.activities.EventDetails
 import org.ignus.ignus18.ui.utils.ctx
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EventListAdapter(private val eventList: List<Event>) :
         RecyclerView.Adapter<EventListAdapter.ViewHolder>() {
@@ -25,7 +30,7 @@ class EventListAdapter(private val eventList: List<Event>) :
     override fun onBindViewHolder(holder: EventListAdapter.ViewHolder, position: Int) {
         Glide.with(holder.cover.context).load(eventList[position].cover_url).into(holder.cover)
         holder.title?.text = eventList[position].name
-        holder.time?.text = eventList[position].timestamp
+        holder.time?.text = formatDateTime(eventList[position].date_time)
         holder.venue?.text = eventList[position].location.name
 
         holder.cover.setOnClickListener({ showFullDetails(position) })
@@ -33,6 +38,7 @@ class EventListAdapter(private val eventList: List<Event>) :
         holder.venue?.setOnClickListener({ launchGmaps(position) })
 
         holder.register?.setOnClickListener({ registerForEvent(position) })
+
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -61,6 +67,17 @@ class EventListAdapter(private val eventList: List<Event>) :
 
     private fun registerForEvent(position: Int) {
         Toast.makeText(App.instance, "Call event register api " + position, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun formatDateTime(date_time: String): String {
+        try {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.ENGLISH)
+            val date = inputFormat.parse(date_time)
+            val outputFormat = SimpleDateFormat("EEE, dd MMM  hh:mm aa", Locale.ENGLISH)
+            return outputFormat.format(date)
+        } catch (e: Exception) {
+            return "Coming soon..."
+        }
     }
 
 

@@ -8,61 +8,59 @@
     android:orientation="vertical"
     android:visibility="visible">
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="72dp"
-        android:src="@drawable/ic_ignus_logo"
-        app:layout_constraintBottom_toTopOf="@id/dummy"
+
+    <LinearLayout
+        android:id="@+id/dummy"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/a1_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:text="Skip>>"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9">
         <View
-            android:id="@+id/dummy"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_gravity="bottom"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9"
             android:background="@drawable/temp1"
-            android:elevation="0dp" />
+            android:backgroundTint="#555"
+            android:elevation="8dp" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/a1_username"
+        style="@android:style/Widget.Material.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="Register"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="386dp" />
+        android:textSize="16sp"
+        android:background="@drawable/temp1"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dummy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a1_password"/>
 
     <Button
         android:id="@+id/a1_password"
+        style="@android:style/Widget.Material.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Login"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="472dp" />
+        android:textSize="16sp"
+        android:background="@drawable/temp1"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/a1_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dummy" />
 
 </android.support.constraint.ConstraintLayout>

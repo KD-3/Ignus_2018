@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#88809b"
+        android:background="#455A64"
         android:src="@drawable/ic_ignus_logo"
         android:padding="72dp"
         app:layout_constraintBottom_toTopOf="@+id/dummy2"
