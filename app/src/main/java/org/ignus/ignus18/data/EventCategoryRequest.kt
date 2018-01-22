@@ -66,7 +66,7 @@ class EventDetailRequest {
         if (isConnected())
             eventDetailJson = URL(apiUrl).readText()
         else {
-            eventDetailJson = "{\"url\":\"/\",\"about\":\"error\",\"details\":\"error\",\"pdf\":\"null\"}"
+            eventDetailJson = "{\"url\":\"/\",\"about\":\"Error\",\"details\":\"Error\",\"pdf\":\"null\"}"
             doAsync { uiThread { Toast.makeText(App.instance, "Server/Internet error -> Outdated Data", Toast.LENGTH_LONG).show() } }
         }
         return Gson().fromJson(eventDetailJson, EventDetail::class.java)

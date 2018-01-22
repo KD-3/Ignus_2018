@@ -18,13 +18,15 @@ import com.bumptech.glide.request.RequestOptions
 import org.ignus.ignus18.ui.activities.MainActivity
 
 
-class EventCategoryListAdapter(private val eventCategories: List<EventCategory>) :
-        RecyclerView.Adapter<EventCategoryListAdapter.ViewHolder>() {
+class EventCategoryListAdapter(private val eventCategories: List<EventCategory>) : RecyclerView.Adapter<EventCategoryListAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cover: ImageView = view.findViewById(R.id.frag_ed_cover)
         val title: TextView = view.findViewById(R.id.frag_ed_title)
     }
+
+    private val cc = arrayOf("gfgf", "hfhf")
+    val c = "djc"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.ctx).inflate(R.layout.event_categories_card, parent, false)
@@ -37,10 +39,10 @@ class EventCategoryListAdapter(private val eventCategories: List<EventCategory>)
 
         Glide.with(holder.cover.context)
                 .load(eventCategories[position].cover)
-                .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.cover)
 
         holder.title.text = eventCategories[position].name
+
         holder.cover.transitionName = "transition" + position
 
         holder.cover.setOnClickListener({

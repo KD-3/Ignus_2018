@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         initialize() // Toolbar
         loadFragment(navItemIndex) // I mean home fragment
         setUpNavHeader() // Navigation bar header items
@@ -95,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         //txtName, txtWebsite, img_profile, img_header_bg will be loaded from url and set them
     }
 
+    // This function will be called when user clicks the item(s) of nav bar
     private fun handleNavigationMenuClickEvents(navigationView: NavigationView) {
 
         navigationView.setNavigationItemSelectedListener { item ->
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun loadFragment(index: Int = 0) {
+    private fun loadFragment(index: Int = 0) {
         navItemIndex = index
         currentTag = fragTag[index]
         loadCurrentFragment()
@@ -213,6 +213,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // When user selects image for nav bar
         if (requestCode == 199 && resultCode == Activity.RESULT_OK) {
             //user selects img for nav header profile pic
             //the image path will be saved for future

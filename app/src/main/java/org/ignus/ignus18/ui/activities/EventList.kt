@@ -25,6 +25,8 @@ class EventList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_list)
 
+
+        //Shared element transition stuff
         supportPostponeEnterTransition()
         val index = intent.getIntExtra("catPosition", 0)
         val parentType = intent.getStringExtra("parent_type")
@@ -41,17 +43,21 @@ class EventList : AppCompatActivity() {
                     }
 
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        supportStartPostponedEnterTransition()
                         return true
                     }
                 })
                 .into(el_backdrop)
 
+
+        //Some basic commands
         setSupportActionBar(el_toolbar)
         el_collapsingToolbar.title = list[index].name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         EventDetails.catPosition = index
         EventDetails.parentType = parentType
 
+        //Load recycler view with event list
         loadView(list[index].events)
 
     }

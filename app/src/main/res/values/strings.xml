@@ -68,5 +68,6 @@
               </div>
     </string>
     <string name="register_event">Register Event</string>
+    <string name="loading">Loading…</string>
 
 </resources>

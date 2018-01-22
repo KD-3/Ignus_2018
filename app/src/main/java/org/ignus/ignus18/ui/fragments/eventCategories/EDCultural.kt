@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class EDCultural : Fragment() {
         CulturalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type == "1" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 3)
+            CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 4)
             CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
         } else {
             CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 2)

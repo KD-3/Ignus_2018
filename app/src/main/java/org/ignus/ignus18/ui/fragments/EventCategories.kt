@@ -1,8 +1,6 @@
 package org.ignus.ignus18.ui.fragments
 
 
-import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.BottomNavigationView
@@ -14,7 +12,6 @@ import kotlinx.android.synthetic.main.frag_event_categories.*
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.EventCategory
 import org.ignus.ignus18.domain.commands.RequestEventCategoryCommand
-import org.ignus.ignus18.ui.activities.MainActivity
 import org.ignus.ignus18.ui.fragments.eventCategories.EDCultural
 import org.ignus.ignus18.ui.fragments.eventCategories.EDFlagship
 import org.ignus.ignus18.ui.fragments.eventCategories.EDTechnical
@@ -27,7 +24,6 @@ class EventCategories : Fragment() {
     companion object {
         lateinit var resultList: List<EventCategory>
     }
-    private val dialog by lazy { ProgressDialog(context) }
 
     private val cultural by lazy { EDCultural() }
     private val technical by lazy { EDTechnical() }
@@ -42,39 +38,29 @@ class EventCategories : Fragment() {
         true
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.frag_event_categories, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        dialog.setMessage("Please wait...")
-        dialog.setCancelable(false)
-
-        val task = doAsync {
+        doAsync {
             resultList = RequestEventCategoryCommand().execute().eventCategories
-            uiThread { dialog.dismiss(); loadCurrentFragment(cultural) }
+            uiThread {
+                loadCurrentFragment(cultural)
+                loading?.visibility = View.GONE
+                navigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+            }
         }
-
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", { _, _ ->
-            task.cancel(true)
-            dialog.dismiss()
-            (activity as MainActivity).loadFragment()
-        })
-        dialog.show()
     }
 
     private fun loadCurrentFragment(fragment: Fragment) {
 
         val mPendingRunnable = Runnable {
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            //fragmentTransaction?.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
             fragmentTransaction?.replace(R.id.eventCategoryFrame, fragment)
             fragmentTransaction?.disallowAddToBackStack()
             fragmentTransaction?.commitAllowingStateLoss()

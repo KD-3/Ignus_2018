@@ -31,7 +31,7 @@ class EDTechnical : Fragment() {
         TechnicalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type=="3" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 3)
+            TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 4)
             TechnicalEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
         } else {
             TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 2)

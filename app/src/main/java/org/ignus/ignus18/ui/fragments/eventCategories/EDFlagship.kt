@@ -31,7 +31,7 @@ class EDFlagship : Fragment() {
         FlagshipEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type == "2" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 3)
+            FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 4)
             FlagshipEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
         } else {
             FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 2)

@@ -10,8 +10,7 @@ class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         outRect.left = 2 * space
         outRect.right = 2 * space
-        outRect.top = space
-        outRect.bottom = space
+        outRect.bottom = 2 * space
 
         // Add top margin only for the first item to avoid double space between items
         if (parent.getChildAdapterPosition(view) == 0 || parent.getChildAdapterPosition(view) == 1)
@@ -28,15 +27,15 @@ class SpacesItemDecorationLand(private val space: Int) : RecyclerView.ItemDecora
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         outRect.left = space
         outRect.right = space
-        outRect.top = space
-        outRect.bottom = space
+        outRect.bottom = 2 * space
 
         // Add top margin only for the first item to avoid double space between items
-        if (parent.getChildAdapterPosition(view) == 0 || parent.getChildAdapterPosition(view) == 1 || parent.getChildAdapterPosition(view) == 2)
-            outRect.top = 2 * space
+        when(parent.getChildAdapterPosition(view)){
+            0,1,2,3 ->outRect.top = 2 * space
+        }
 
-        if (parent.getChildAdapterPosition(view) % 3 == 0) outRect.left = 2 * space
-        if (parent.getChildAdapterPosition(view) % 3 == 2) outRect.right = 2 * space
+        if (parent.getChildAdapterPosition(view) % 4 == 0) outRect.left = 2 * space
+        if (parent.getChildAdapterPosition(view) % 4 == 3) outRect.right = 2 * space
 
     }
 }

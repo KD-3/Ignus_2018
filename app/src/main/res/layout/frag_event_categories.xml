@@ -6,6 +6,14 @@
     android:background="#CFD8DC"
     tools:context="org.ignus.ignus18.ui.fragments.EventCategories">
 
+    <TextView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/loading"/>
+
     <FrameLayout
         android:id="@+id/eventCategoryFrame"
         android:layout_width="match_parent"

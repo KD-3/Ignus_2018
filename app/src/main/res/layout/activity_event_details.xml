@@ -83,33 +83,13 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/ed_tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            app:tabGravity="center"
-            app:tabMode="fixed" />
+            android:layout_height="wrap_content"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/ed_recyclerView"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/ed_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <TextView
-            android:id="@+id/ed_about"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#000"
-            android:textSize="16sp" />
-    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
