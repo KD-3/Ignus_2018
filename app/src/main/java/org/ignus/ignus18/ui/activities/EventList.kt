@@ -2,6 +2,7 @@ package org.ignus.ignus18.ui.activities
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem

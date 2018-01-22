@@ -26,6 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
-        android:backgroundTint="#88FFFFFF"
+        android:backgroundTint="#FFFFFF"
         app:menu="@menu/navigation" />
 </RelativeLayout>

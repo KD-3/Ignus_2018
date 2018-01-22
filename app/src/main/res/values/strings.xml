@@ -69,5 +69,7 @@
     </string>
     <string name="register_event">Register Event</string>
     <string name="loading">Loading…</string>
+    <string name="more_details"><![CDATA[More Details >>]]></string>
+    <string name="download_pdf"><![CDATA[Download Pdf >>]]></string>
 
 </resources>
