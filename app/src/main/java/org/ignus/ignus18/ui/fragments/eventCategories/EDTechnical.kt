@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_edtechnical.*
+import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
-import org.ignus.ignus18.ui.utils.SpacesItemDecoration
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationLand
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationFour
+import org.jetbrains.anko.dip
 
 
 class EDTechnical : Fragment() {
@@ -32,10 +34,10 @@ class EDTechnical : Fragment() {
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 4)
-            TechnicalEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
+            TechnicalEventCategoryList.addItemDecoration(SpacesItemDecorationFour(App.instance.dip(4)))
         } else {
             TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 2)
-            TechnicalEventCategoryList.addItemDecoration(SpacesItemDecoration(16))
+            TechnicalEventCategoryList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
         }
     }
 

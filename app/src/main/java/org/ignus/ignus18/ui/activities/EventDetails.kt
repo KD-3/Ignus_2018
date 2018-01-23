@@ -1,6 +1,7 @@
 package org.ignus.ignus18.ui.activities
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -18,11 +19,15 @@ import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.event_details_tab_1.*
 import kotlinx.android.synthetic.main.event_details_tab_2.*
 import kotlinx.android.synthetic.main.event_details_tab_3.*
+import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.EventDetail
 import org.ignus.ignus18.domain.commands.RequestEventDetailCommand
 import org.ignus.ignus18.ui.adapters.EventOrganiserListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationOne
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
+import org.jetbrains.anko.dip
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -91,6 +96,7 @@ class EventDetails : AppCompatActivity() {
 
         val index = intent.getIntExtra("index", 0)
         ed_tab3_recyclerView?.adapter = EventOrganiserListAdapter(EventCategories.resultList.filter { it.parent_type == parentType }[catPosition].events[index].organiser_list)
+        ed_tab3_recyclerView?.setHasFixedSize(true)
         ed_tab3_recyclerView?.layoutManager = GridLayoutManager(this, 1)
     }
 
@@ -100,7 +106,7 @@ class EventDetails : AppCompatActivity() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://ignus.org${data.url}")))
         })
 
-        if (data.pdf !=  null && data.pdf != "null") {
+        if (data.pdf != null && data.pdf != "null") {
             ed_pdf.visibility = View.VISIBLE
             ed_pdf.setOnClickListener({
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.pdf)))

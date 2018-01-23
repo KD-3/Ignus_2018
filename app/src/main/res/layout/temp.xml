@@ -1,6 +1,5 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_login_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,23 +8,18 @@
     android:visibility="visible">
 
 
-    <LinearLayout
-        android:id="@+id/dummy"
+    <View
+        android:id="@+id/edo_avatar"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="bottom"
+        android:background="@drawable/temp1"
+        android:backgroundTint="#555"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/temp1"
-            android:backgroundTint="#555"
-            android:elevation="8dp" />
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.9" />
 
 
     <Button
@@ -36,14 +30,14 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Register"
-        android:textSize="16sp"
         android:background="@drawable/temp1"
         android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dummy"
+        android:text="Register"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edo_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a1_password"/>
+        app:layout_constraintTop_toBottomOf="@+id/a1_password" />
 
     <Button
         android:id="@+id/a1_password"
@@ -54,13 +48,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Login"
-        android:textSize="16sp"
         android:background="@drawable/temp1"
         android:elevation="8dp"
+        android:text="Login"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/a1_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dummy" />
+        app:layout_constraintTop_toTopOf="@+id/edo_avatar" />
 
 </android.support.constraint.ConstraintLayout>

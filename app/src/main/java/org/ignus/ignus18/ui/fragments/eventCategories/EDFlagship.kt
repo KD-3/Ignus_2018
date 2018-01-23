@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_edflagship.*
+import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
-import org.ignus.ignus18.ui.utils.SpacesItemDecoration
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationLand
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationFour
+import org.jetbrains.anko.dip
 
 
 class EDFlagship : Fragment() {
@@ -32,10 +34,10 @@ class EDFlagship : Fragment() {
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 4)
-            FlagshipEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
+            FlagshipEventCategoryList.addItemDecoration(SpacesItemDecorationFour(App.instance.dip(4)))
         } else {
             FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 2)
-            FlagshipEventCategoryList.addItemDecoration(SpacesItemDecoration(16))
+            FlagshipEventCategoryList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
         }
     }
 }

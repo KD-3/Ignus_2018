@@ -19,7 +19,8 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars"
-            android:layout_above="@+id/frag_ed_title"/>
+            android:layout_above="@+id/frag_ed_title"
+            android:contentDescription="@string/app_name" />
 
         <TextView
             android:id="@+id/frag_ed_title"
@@ -29,6 +30,7 @@
             android:layout_margin="8dp"
             android:textColor="#111"
             android:textSize="18sp"
+            android:singleLine="true"
             tools:text="@tools:sample/full_names" />
     </org.ignus.ignus18.ui.utils.SquareRelativeLayout>
 

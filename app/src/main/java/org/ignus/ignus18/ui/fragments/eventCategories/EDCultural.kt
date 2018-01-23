@@ -5,16 +5,17 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_edcultural.*
+import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
-import org.ignus.ignus18.ui.utils.SpacesItemDecoration
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationLand
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationFour
+import org.jetbrains.anko.dip
 
 
 class EDCultural : Fragment() {
@@ -33,10 +34,10 @@ class EDCultural : Fragment() {
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 4)
-            CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationLand(16))
+            CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationFour(App.instance.dip(4)))
         } else {
             CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 2)
-            CulturalEventCategoryList.addItemDecoration(SpacesItemDecoration(16))
+            CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
         }
     }
 }

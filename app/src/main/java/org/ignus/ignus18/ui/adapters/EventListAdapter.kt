@@ -66,7 +66,7 @@ class EventListAdapter(private val eventList: List<Event>) :
     }
 
     private fun registerForEvent(position: Int) {
-        Toast.makeText(App.instance, "Call event register api " + position, Toast.LENGTH_SHORT).show()
+        Toast.makeText(App.instance, "Call event register api " + eventList[position].unique_id, Toast.LENGTH_SHORT).show()
     }
 
     private fun formatDateTime(date_time: String): String {

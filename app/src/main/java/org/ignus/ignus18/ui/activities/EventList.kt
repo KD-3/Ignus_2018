@@ -1,9 +1,11 @@
 package org.ignus.ignus18.ui.activities
 
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.widget.LinearLayout
@@ -14,10 +16,14 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_event_list.*
+import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.Event
 import org.ignus.ignus18.ui.adapters.EventListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationOne
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
+import org.jetbrains.anko.dip
 
 
 class EventList : AppCompatActivity() {
@@ -64,11 +70,15 @@ class EventList : AppCompatActivity() {
     }
 
     private fun loadView(list: List<Event>) {
+        el_eventList.adapter = EventListAdapter(list)
 
-        if (list.isNotEmpty()) {
-            el_eventList.adapter = EventListAdapter(list)
-            el_eventList.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        } else Toast.makeText(this, "No event(s) added yet :-(", Toast.LENGTH_SHORT).show()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            el_eventList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
+            el_eventList.layoutManager = GridLayoutManager(this, 2)
+        } else {
+            el_eventList.addItemDecoration(SpacesItemDecorationOne(App.instance.dip(8)))
+            el_eventList.layoutManager = GridLayoutManager(this, 1)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

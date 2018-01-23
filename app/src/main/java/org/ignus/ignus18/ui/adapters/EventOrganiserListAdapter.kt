@@ -10,11 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.Organiser
 import org.ignus.ignus18.ui.utils.ctx
 
-class EventOrganiserListAdapter (private val list: List<Organiser>) : RecyclerView.Adapter<EventOrganiserListAdapter.ViewHolder>(){
+class EventOrganiserListAdapter(private val list: List<Organiser>) : RecyclerView.Adapter<EventOrganiserListAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
@@ -31,15 +32,25 @@ class EventOrganiserListAdapter (private val list: List<Organiser>) : RecyclerVi
 
         holder.name?.text = list[position].name
         holder.number?.text = list[position].phone
-        holder.email?.visibility = View.GONE
 
         holder.call?.setOnClickListener({
-            holder.avatar.context?.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+list[position].phone)))})
+            holder.avatar.context?.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + list[position].phone)))
+        })
 
         holder.whatsapp?.setOnClickListener({
-            val whatsNum :String = if (list[position].phone.length != 10) list[position].phone else "91" + list[position].phone
+            val whatsNum: String = if (list[position].phone.length != 10) list[position].phone else "91" + list[position].phone
             holder.avatar.context?.startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://api.whatsapp.com/send?phone="+whatsNum)))
+                    Uri.parse("https://api.whatsapp.com/send?phone=" + whatsNum)))
+        })
+
+        holder.email?.setOnClickListener({
+            val i = Intent(Intent.ACTION_SENDTO)
+            i.type = "message/rfc822"
+            i.data = Uri.parse("mailto:${list[position].email}")
+            i.putExtra(Intent.EXTRA_EMAIL, arrayOf(list[position].email))
+            i.putExtra(Intent.EXTRA_SUBJECT, "Ignus 2018")
+            i.putExtra(Intent.EXTRA_TEXT, "Hi ${list[position].name}")
+            App.instance.startActivity(i)
         })
     }
 
