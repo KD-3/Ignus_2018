@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.frag_edcultural.*
 import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
-import org.ignus.ignus18.ui.fragments.EventCategories
+import org.ignus.ignus18.data.Helper
 import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
 import org.ignus.ignus18.ui.utils.SpacesItemDecorationFour
 import org.jetbrains.anko.dip
@@ -30,7 +30,8 @@ class EDCultural : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        CulturalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type == "1" })
+        CulturalEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type == "1" })
+
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 4)

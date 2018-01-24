@@ -23,33 +23,28 @@ import org.ignus.ignus18.data.Event
 import org.ignus.ignus18.data.EventDetail
 import org.ignus.ignus18.domain.commands.RequestEventDetailCommand
 import org.ignus.ignus18.ui.adapters.EventOrganiserListAdapter
-import org.ignus.ignus18.ui.fragments.EventCategories
+import org.ignus.ignus18.data.Helper
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 
 class EventDetails : AppCompatActivity() {
 
-    companion object {
-        var catPosition = 0
-        var parentType = "0"
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
 
-        val index = intent.getIntExtra("index", 0)
-        val event = EventCategories.resultList.filter { it.parent_type == parentType }[catPosition].events[index]
 
-        pager()
-        setUpActionBar(event)
-        getEventData(event.unique_id, event)
-
+        val event = Helper.event
+        if (event!=null){
+            setUpViewPager()
+            setUpActionBar(event)
+            getEventData(event.unique_id, event)
+        }
     }
 
-    private fun pager() {
+    private fun setUpViewPager() {
         ed_pager.adapter = SectionsPagerAdapter(supportFragmentManager)
         ed_pager.offscreenPageLimit = 2
         ed_tabs.setupWithViewPager(ed_pager)

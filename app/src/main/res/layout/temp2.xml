@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintDimensionRatio="H,4:3">
+
+    <ImageView
+        android:id="@+id/edo_avatar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="H,3:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/edo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/edo_number"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/edo_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/edo_avatar"
+        app:layout_constraintStart_toStartOf="@id/edo_name"
+        tools:text="@tools:sample/us_phones" />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edo_call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edo_avatar" />
+
+    <ImageView
+        android:id="@+id/edo_call"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/app_name"
+        android:elevation="8dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_phone_call"
+        app:layout_constraintEnd_toStartOf="@+id/edo_whatsApp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edo_avatar" />
+
+    <ImageView
+        android:id="@+id/edo_whatsApp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:elevation="8dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_whatsapp"
+        app:layout_constraintBottom_toBottomOf="@+id/edo_call"
+        app:layout_constraintEnd_toStartOf="@+id/edo_email"
+        app:layout_constraintStart_toEndOf="@+id/edo_call"
+        app:layout_constraintTop_toTopOf="@+id/edo_call" />
+
+    <ImageView
+        android:id="@+id/edo_email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:elevation="8dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_email"
+        app:layout_constraintBottom_toBottomOf="@+id/edo_call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edo_whatsApp"
+        app:layout_constraintTop_toTopOf="@+id/edo_call" />
+
+
+</android.support.constraint.ConstraintLayout>

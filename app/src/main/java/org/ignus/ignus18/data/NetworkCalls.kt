@@ -7,47 +7,35 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import org.ignus.ignus18.App
-import org.ignus.ignus18.ui.utils.Helper
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.net.URL
 
 class EventCategoryRequest {
-    companion object {
-        private val API_URL = "https://ignus.org/api/event/category-list/?format=json"
-    }
+
+    private val apiUrl = "https://ignus.org/api/event/category-list/?format=json"
+
 
     fun execute(): EventCategoryResult {
         val eventCategoryJsonStr: String
 
-        if (Helper().isConnected()) {
+        if (Helper.isConnected()) {
 
-            eventCategoryJsonStr = URL(API_URL).readText()
+            eventCategoryJsonStr = URL(apiUrl).readText()
             storeJSONLocally(eventCategoryJsonStr)
 
         } else {
 
-            eventCategoryJsonStr = getLocalJSON()
+            eventCategoryJsonStr = Helper.getLocalJSON()
             doAsync { uiThread { Toast.makeText(App.instance, "Server/Internet error -> Outdated Data", Toast.LENGTH_LONG).show() } }
         }
 
-        return EventCategoryResult(getDataClassFromJSON(eventCategoryJsonStr))
-    }
-
-    private fun getDataClassFromJSON(JsonStr: String): List<EventCategory> {
-        return Gson().fromJson(JsonStr, object : TypeToken<List<EventCategory>>() {}.type)
-    }
-
-    private fun getLocalJSON(): String {
-        val sp = PreferenceManager.getDefaultSharedPreferences(App.instance.applicationContext)
-        return sp.getString("theJSON", "default json")
+        return EventCategoryResult(Helper.getDataClassFromJSON(eventCategoryJsonStr))
     }
 
     private fun storeJSONLocally(json: String) {
-        val sp = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        val editor = sp.edit()
+        val editor = PreferenceManager.getDefaultSharedPreferences(App.instance).edit()
         editor.putString("theJSON", json)
         editor.apply()
     }
@@ -58,7 +46,7 @@ class EventDetailRequest {
     fun execute(eventId: String): EventDetail {
         val apiUrl = "https://ignus.org/api/event/$eventId/detail/?format=json"
         val eventDetailJson: String
-        if (Helper().isConnected())
+        if (Helper.isConnected())
             eventDetailJson = URL(apiUrl).readText()
         else {
             eventDetailJson = "{\"url\":\"/\",\"about\":\"Error\",\"details\":\"Error\",\"pdf\":\"null\"}"
@@ -68,10 +56,10 @@ class EventDetailRequest {
     }
 }
 
-class RegisterdEventRequest() {
+class RegisteredEventRequest {
 
     fun execute(): Result<String, FuelError> {
-        val apiUrl = "https://ignus.org/api/event/detail/?format=json"
+        val apiUrl = "https://ignus.org/api/dummy"
         val token = PreferenceManager.getDefaultSharedPreferences(App.instance).getString("token", "")
 
 

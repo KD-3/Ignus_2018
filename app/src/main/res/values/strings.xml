@@ -54,7 +54,6 @@
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</string>
-
     <string name="lorem2">
               <div align="middle" id="menu">
                  <a href="/index.htm">HOME</a> |
@@ -67,6 +66,7 @@
                  <p>Actual content goes here.....</p>
               </div>
     </string>
+
     <string name="register_event">Register Event</string>
     <string name="loading">Loading…</string>
     <string name="more_details"><![CDATA[More Details >>]]></string>
@@ -76,5 +76,6 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="failed">Failed</string>
+    <string name="team_size">%1$d-%2$d</string>
 
 </resources>

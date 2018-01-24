@@ -63,6 +63,18 @@
                     android:textSize="16sp"
                     android:textColor="@android:color/primary_text_light"
                     tools:text="@tools:sample/date/mmddyy" />
+
+                <TextView
+                    android:id="@+id/frag_ed2_teamSize"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/primary_text_light"
+                    android:maxLines="1"
+                    tools:text="@tools:sample/us_phones"/>
             </LinearLayout>
 
             <RelativeLayout

@@ -11,10 +11,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_edflagship.*
 import org.ignus.ignus18.App
 import org.ignus.ignus18.R
+import org.ignus.ignus18.data.Helper
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
-import org.ignus.ignus18.ui.fragments.EventCategories
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
 import org.ignus.ignus18.ui.utils.SpacesItemDecorationFour
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
 import org.jetbrains.anko.dip
 
 
@@ -30,7 +30,7 @@ class EDFlagship : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        FlagshipEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type == "2" })
+        FlagshipEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type == "2" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 4)

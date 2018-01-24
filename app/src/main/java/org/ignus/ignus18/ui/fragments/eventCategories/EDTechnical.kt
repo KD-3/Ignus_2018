@@ -11,10 +11,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_edtechnical.*
 import org.ignus.ignus18.App
 import org.ignus.ignus18.R
+import org.ignus.ignus18.data.Helper
 import org.ignus.ignus18.ui.adapters.EventCategoryListAdapter
-import org.ignus.ignus18.ui.fragments.EventCategories
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
 import org.ignus.ignus18.ui.utils.SpacesItemDecorationFour
+import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
 import org.jetbrains.anko.dip
 
 
@@ -30,7 +30,7 @@ class EDTechnical : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        TechnicalEventCategoryList.adapter = EventCategoryListAdapter(EventCategories.resultList.filter { it.parent_type=="3" })
+        TechnicalEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type=="3" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 4)

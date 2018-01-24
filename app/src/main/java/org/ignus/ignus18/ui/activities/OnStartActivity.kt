@@ -2,13 +2,11 @@ package org.ignus.ignus18.ui.activities
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_on_start.*
 import org.ignus.ignus18.R
 
@@ -59,7 +57,7 @@ class OnStartActivity : AppCompatActivity() {
 
     private fun loginScreen() {
         toggleLayout()
-        window.statusBarColor = Color.parseColor("#00ACC1")
+        window.statusBarColor = Color.parseColor("#9E9E9E")
 
 
         a1_register.setOnClickListener({
@@ -72,6 +70,7 @@ class OnStartActivity : AppCompatActivity() {
 
         a1_skip.setOnClickListener({
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         })
 
     }

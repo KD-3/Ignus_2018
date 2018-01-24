@@ -93,30 +93,26 @@
         android:id="@+id/layout_login_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/temp1"
         android:orientation="vertical"
         android:visibility="visible">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#26c6da"
+            android:layout_height="0dp"
             android:padding="72dp"
             android:src="@drawable/ic_ignus_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/a1_register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/a1_register"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="48dp"
             android:layout_marginStart="48dp"
-            android:background="@drawable/temp1"
             android:elevation="2dp"
             android:text="Register"
             android:textSize="24sp"
@@ -126,13 +122,11 @@
 
         <Button
             android:id="@+id/a1_login"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:layout_marginEnd="48dp"
             android:layout_marginStart="48dp"
-            android:background="@drawable/temp1"
             android:elevation="2dp"
             android:text="Login"
             android:textSize="24sp"
@@ -145,8 +139,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
             android:padding="16dp"
             android:text="Skip>>"
             app:layout_constraintEnd_toEndOf="parent"

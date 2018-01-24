@@ -1,6 +1,7 @@
 package org.ignus.ignus18.ui.adapters
 
 import android.content.Intent
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,8 @@ import com.bumptech.glide.Glide
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.EventCategory
 import org.ignus.ignus18.ui.activities.EventList
-import org.ignus.ignus18.ui.utils.ctx
-import android.support.v4.app.ActivityOptionsCompat
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import org.ignus.ignus18.ui.activities.MainActivity
+import org.ignus.ignus18.ui.utils.ctx
 
 
 class EventCategoryListAdapter(private val eventCategories: List<EventCategory>) : RecyclerView.Adapter<EventCategoryListAdapter.ViewHolder>() {
@@ -24,9 +22,6 @@ class EventCategoryListAdapter(private val eventCategories: List<EventCategory>)
         val cover: ImageView = view.findViewById(R.id.frag_ed_cover)
         val title: TextView = view.findViewById(R.id.frag_ed_title)
     }
-
-    private val cc = arrayOf("gfgf", "hfhf")
-    val c = "djc"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.ctx).inflate(R.layout.event_categories_card, parent, false)

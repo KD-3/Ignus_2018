@@ -3,13 +3,9 @@ package org.ignus.ignus18.ui.activities
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
-import android.widget.LinearLayout
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -19,8 +15,8 @@ import kotlinx.android.synthetic.main.activity_event_list.*
 import org.ignus.ignus18.App
 import org.ignus.ignus18.R
 import org.ignus.ignus18.data.Event
+import org.ignus.ignus18.data.Helper
 import org.ignus.ignus18.ui.adapters.EventListAdapter
-import org.ignus.ignus18.ui.fragments.EventCategories
 import org.ignus.ignus18.ui.utils.SpacesItemDecorationOne
 import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
 import org.jetbrains.anko.dip
@@ -39,7 +35,7 @@ class EventList : AppCompatActivity() {
         val parentType = intent.getStringExtra("parent_type")
 
         el_backdrop.transitionName = "transition" + index
-        val list = EventCategories.resultList.filter { it.parent_type == parentType }
+        val list = Helper.eventCategories.filter { it.parent_type == parentType }
 
         Glide.with(this)
                 .load(list[index].cover)
@@ -57,15 +53,13 @@ class EventList : AppCompatActivity() {
                 .into(el_backdrop)
 
 
-        //Some basic commands
+        // Action bar setUp
         setSupportActionBar(el_toolbar)
         el_collapsingToolbar.title = list[index].name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        EventDetails.catPosition = index
-        EventDetails.parentType = parentType
 
-        //Load recycler view with event list
-        loadView(list[index].events)
+
+        loadView(list[index].events)    //Load recycler view with event list
 
     }
 

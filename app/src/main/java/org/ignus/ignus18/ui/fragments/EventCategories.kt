@@ -5,25 +5,22 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_event_categories.*
 import org.ignus.ignus18.R
-import org.ignus.ignus18.data.EventCategory
 import org.ignus.ignus18.domain.commands.RequestEventCategoryCommand
 import org.ignus.ignus18.ui.fragments.eventCategories.EDCultural
 import org.ignus.ignus18.ui.fragments.eventCategories.EDFlagship
 import org.ignus.ignus18.ui.fragments.eventCategories.EDTechnical
+import org.ignus.ignus18.data.Helper
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 
 class EventCategories : Fragment() {
-
-    companion object {
-        lateinit var resultList: List<EventCategory>
-    }
 
     private val cultural by lazy { EDCultural() }
     private val technical by lazy { EDTechnical() }
@@ -48,7 +45,10 @@ class EventCategories : Fragment() {
 
 
         doAsync {
-            resultList = RequestEventCategoryCommand().execute().eventCategories
+            Log.d("Suthar", "Before")
+            val temp = RequestEventCategoryCommand().execute().eventCategories
+            Helper.eventCategories = temp
+            Log.d("Suthar", "After")
             uiThread {
                 loadCurrentFragment(cultural)
                 loading?.visibility = View.GONE
