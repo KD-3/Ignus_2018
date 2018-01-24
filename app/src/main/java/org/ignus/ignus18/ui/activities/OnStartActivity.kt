@@ -23,6 +23,7 @@ class OnStartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_on_start)
 
         controller()
+
     }
 
     private fun controller() {
@@ -33,27 +34,16 @@ class OnStartActivity : AppCompatActivity() {
     }
 
     private fun splashScreen() {
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-        layout_login_screen.visibility = View.GONE
-        layout_splash_screen.visibility = View.VISIBLE
-        layout_notification_access.visibility = View.GONE
+        toggleLayout('S')
+        window.statusBarColor = Color.parseColor("#212121")
 
         splashScreen = false
         Handler().postDelayed({ controller() }, 3000)
     }
 
     private fun notificationAccess() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = Color.parseColor("#FFE737")
-        }
-
-
-        layout_splash_screen.visibility = View.GONE
-        layout_login_screen.visibility = View.GONE
-        layout_notification_access.visibility = View.VISIBLE
+        toggleLayout('N')
+        window.statusBarColor = Color.parseColor("#FBC02D")
 
         a1_yes.setOnClickListener({
             controller()
@@ -68,11 +58,9 @@ class OnStartActivity : AppCompatActivity() {
     }
 
     private fun loginScreen() {
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        toggleLayout()
+        window.statusBarColor = Color.parseColor("#00ACC1")
 
-        layout_splash_screen.visibility = View.GONE
-        layout_login_screen.visibility = View.VISIBLE
-        layout_notification_access.visibility = View.GONE
 
         a1_register.setOnClickListener({
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -91,4 +79,17 @@ class OnStartActivity : AppCompatActivity() {
     private fun showNotificationWindow(): Boolean = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("showNotificationWindow", true)
 
     private fun isLoggedIn(): Boolean = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("isLoggedIn", false)
+
+    private fun toggleLayout(char: Char = 'L') {
+
+        layout_splash_screen.visibility = View.GONE
+        layout_login_screen.visibility = View.GONE
+        layout_notification_access.visibility = View.GONE
+
+        when (char) {
+            'S' -> layout_splash_screen.visibility = View.VISIBLE
+            'N' -> layout_notification_access.visibility = View.VISIBLE
+            else -> layout_login_screen.visibility = View.VISIBLE
+        }
+    }
 }

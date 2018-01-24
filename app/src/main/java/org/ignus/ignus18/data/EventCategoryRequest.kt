@@ -1,14 +1,17 @@
 package org.ignus.ignus18.data
 
 import android.preference.PreferenceManager
-import android.util.Log
 import android.widget.Toast
+import com.github.kittinunf.fuel.core.FuelError
+import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.ignus.ignus18.App
+import org.ignus.ignus18.ui.utils.Helper
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.io.IOException
 import java.net.URL
 
 class EventCategoryRequest {
@@ -19,15 +22,13 @@ class EventCategoryRequest {
     fun execute(): EventCategoryResult {
         val eventCategoryJsonStr: String
 
-        if (isConnected()) {
+        if (Helper().isConnected()) {
 
-            Log.d("Suthar", "isConnected")
             eventCategoryJsonStr = URL(API_URL).readText()
             storeJSONLocally(eventCategoryJsonStr)
 
         } else {
 
-            Log.d("Suthar", "isNotConnected")
             eventCategoryJsonStr = getLocalJSON()
             doAsync { uiThread { Toast.makeText(App.instance, "Server/Internet error -> Outdated Data", Toast.LENGTH_LONG).show() } }
         }
@@ -50,12 +51,6 @@ class EventCategoryRequest {
         editor.putString("theJSON", json)
         editor.apply()
     }
-
-    @Throws(InterruptedException::class, IOException::class)
-    private fun isConnected(): Boolean {
-        val command = "ping -c 1 ignus.org"
-        return Runtime.getRuntime().exec(command).waitFor() == 0
-    }
 }
 
 class EventDetailRequest {
@@ -63,17 +58,25 @@ class EventDetailRequest {
     fun execute(eventId: String): EventDetail {
         val apiUrl = "https://ignus.org/api/event/$eventId/detail/?format=json"
         val eventDetailJson: String
-        if (isConnected())
+        if (Helper().isConnected())
             eventDetailJson = URL(apiUrl).readText()
         else {
             eventDetailJson = "{\"url\":\"/\",\"about\":\"Error\",\"details\":\"Error\",\"pdf\":\"null\"}"
-            doAsync { uiThread { Toast.makeText(App.instance, "Server/Internet error -> Outdated Data", Toast.LENGTH_LONG).show() } }
+            doAsync { uiThread { Toast.makeText(App.instance, "Server/Internet error -> Outdated Data", Toast.LENGTH_SHORT).show() } }
         }
         return Gson().fromJson(eventDetailJson, EventDetail::class.java)
     }
+}
 
-    private fun isConnected(): Boolean {
-        val command = "ping -c 1 ignus.org"
-        return Runtime.getRuntime().exec(command).waitFor() == 0
+class RegisterdEventRequest() {
+
+    fun execute(): Result<String, FuelError> {
+        val apiUrl = "https://ignus.org/api/event/detail/?format=json"
+        val token = PreferenceManager.getDefaultSharedPreferences(App.instance).getString("token", "")
+
+
+        FuelManager.instance.baseHeaders = mapOf("Authorization" to "JWT $token")
+        val (request, response, result) = apiUrl.httpGet().responseString()
+        return result
     }
 }

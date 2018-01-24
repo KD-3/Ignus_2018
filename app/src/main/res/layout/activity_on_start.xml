@@ -100,7 +100,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F44336"
+            android:background="#26c6da"
             android:padding="72dp"
             android:src="@drawable/ic_ignus_logo"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -71,5 +71,10 @@
     <string name="loading">Loading…</string>
     <string name="more_details"><![CDATA[More Details >>]]></string>
     <string name="download_pdf"><![CDATA[Download Pdf >>]]></string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="failed">Failed</string>
 
 </resources>

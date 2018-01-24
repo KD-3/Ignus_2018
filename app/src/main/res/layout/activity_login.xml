@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toTopOf="@+id/dummy2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/app_name" />
 
     <View
         android:id="@+id/dummy2"
@@ -44,7 +45,7 @@
             android:elevation="6dp" />
 
         <EditText
-            android:id="@+id/a1_username"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
@@ -52,30 +53,30 @@
             android:layout_marginTop="48dp"
             android:backgroundTint="#3876De"
             android:elevation="8dp"
-            android:hint="Username"
+            android:hint="@string/username"
             android:inputType="textAutoComplete" />
 
         <EditText
-            android:id="@+id/a1_password"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/a1_username"
+            android:layout_below="@+id/username"
             android:layout_marginEnd="48dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#3876De"
             android:elevation="8dp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:background="@drawable/button_shape_round_corner"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="#FFF"
         app:layout_anchor="@+id/edo_avatar"
         app:layout_anchorGravity="bottom|center"
@@ -84,15 +85,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/forgotPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
-        android:ems="10"
-        android:inputType="none"
-        android:text="Forgot Password?"
-        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:text="@string/forgot_password"
         android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

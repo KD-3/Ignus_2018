@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.ignus.ignus18.R
 import org.ignus.ignus18.ui.fragments.EventCategories
 import org.ignus.ignus18.ui.fragments.Home
+import org.ignus.ignus18.ui.fragments.RegisteredEvent
 
 
 class MainActivity : AppCompatActivity() {
@@ -187,6 +188,7 @@ class MainActivity : AppCompatActivity() {
         return when (navItemIndex) {
             0 -> Home()
             1 -> EventCategories()
+            2 -> RegisteredEvent()
             else -> Home()
         }
     }

@@ -1,7 +1,6 @@
 package org.ignus.ignus18.ui.activities
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,15 +18,12 @@ import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.event_details_tab_1.*
 import kotlinx.android.synthetic.main.event_details_tab_2.*
 import kotlinx.android.synthetic.main.event_details_tab_3.*
-import org.ignus.ignus18.App
 import org.ignus.ignus18.R
+import org.ignus.ignus18.data.Event
 import org.ignus.ignus18.data.EventDetail
 import org.ignus.ignus18.domain.commands.RequestEventDetailCommand
 import org.ignus.ignus18.ui.adapters.EventOrganiserListAdapter
 import org.ignus.ignus18.ui.fragments.EventCategories
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationOne
-import org.ignus.ignus18.ui.utils.SpacesItemDecorationTwo
-import org.jetbrains.anko.dip
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -39,27 +35,17 @@ class EventDetails : AppCompatActivity() {
         var parentType = "0"
     }
 
-    private var data: EventDetail = EventDetail("https://ignus.org", "Loading...", "Loading...", "null")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
 
-
         val index = intent.getIntExtra("index", 0)
         val event = EventCategories.resultList.filter { it.parent_type == parentType }[catPosition].events[index]
 
-
-        setSupportActionBar(ed_toolbar)
-        supportActionBar?.title = event.name
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        Glide.with(this).load(event.cover_url).into(ed_logo)
-
-
-        more()
         pager()
-        getEventData(event.unique_id)
+        setUpActionBar(event)
+        getEventData(event.unique_id, event)
 
     }
 
@@ -69,19 +55,26 @@ class EventDetails : AppCompatActivity() {
         ed_tabs.setupWithViewPager(ed_pager)
     }
 
-    private fun getEventData(eventId: String) {
+    private fun setUpActionBar(event :Event){
+        setSupportActionBar(ed_toolbar)
+        supportActionBar?.title = event.name
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        Glide.with(this).load(event.cover_url).into(ed_logo)
+    }
+
+    private fun getEventData(eventId: String, event :Event) {
 
         doAsync {
-            data = RequestEventDetailCommand().execute(eventId)
+            val data = RequestEventDetailCommand().execute(eventId)
             uiThread {
-                populateData()
+                populateData(event, data)
             }
         }
     }
 
-    private fun populateData() {
+    private fun populateData(event :Event, data:EventDetail) {
 
-        more()
+        more(data)
 
         val about = data.about
         val detail = data.details
@@ -94,13 +87,12 @@ class EventDetails : AppCompatActivity() {
             ed_tab2_textView?.text = Html.fromHtml(detail)
         }
 
-        val index = intent.getIntExtra("index", 0)
-        ed_tab3_recyclerView?.adapter = EventOrganiserListAdapter(EventCategories.resultList.filter { it.parent_type == parentType }[catPosition].events[index].organiser_list)
+        ed_tab3_recyclerView?.adapter = EventOrganiserListAdapter(event.organiser_list)
         ed_tab3_recyclerView?.setHasFixedSize(true)
         ed_tab3_recyclerView?.layoutManager = GridLayoutManager(this, 1)
     }
 
-    private fun more() {
+    private fun more(data:EventDetail) {
 
         ed_moreDetails.setOnClickListener({
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://ignus.org${data.url}")))

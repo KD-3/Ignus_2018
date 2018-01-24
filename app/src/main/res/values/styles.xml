@@ -13,6 +13,11 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="FullScreen2" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="FullScreenDark" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
