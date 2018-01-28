@@ -40,8 +40,8 @@ class EventCategories : Fragment() {
         return inflater.inflate(R.layout.frag_event_categories, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         doAsync {
             Log.d("Suthar", "Before")

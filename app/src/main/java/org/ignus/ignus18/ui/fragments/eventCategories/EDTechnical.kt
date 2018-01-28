@@ -26,8 +26,8 @@ class EDTechnical : Fragment() {
         return inflater.inflate(R.layout.frag_edtechnical, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
         val itemCount = Helper.eventCategories.filter { it.parent_type == "3" }.size

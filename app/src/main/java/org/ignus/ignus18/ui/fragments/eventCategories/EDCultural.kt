@@ -26,8 +26,8 @@ class EDCultural : Fragment() {
         return inflater.inflate(R.layout.frag_edcultural, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val itemCount = Helper.eventCategories.filter { it.parent_type == "1" }.size
         CulturalEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type == "1" })
