@@ -26,17 +26,22 @@ class EDTechnical : Fragment() {
         return inflater.inflate(R.layout.frag_edtechnical, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
 
-        TechnicalEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type=="3" })
+        val itemCount = Helper.eventCategories.filter { it.parent_type == "3" }.size
+        TechnicalEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type == "3" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 4)
             TechnicalEventCategoryList.addItemDecoration(SpacesItemDecorationFour(App.instance.dip(4)))
         } else {
-            TechnicalEventCategoryList.layoutManager = GridLayoutManager(context, 2)
+            val layoutManager = GridLayoutManager(context, 2)
+            layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int = if (itemCount % 2 == 1 && itemCount == position + 1) 2 else 1
+            }
+            TechnicalEventCategoryList.layoutManager = layoutManager
             TechnicalEventCategoryList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
         }
     }

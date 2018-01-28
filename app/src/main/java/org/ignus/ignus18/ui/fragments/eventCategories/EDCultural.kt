@@ -26,10 +26,10 @@ class EDCultural : Fragment() {
         return inflater.inflate(R.layout.frag_edcultural, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
-
+        val itemCount = Helper.eventCategories.filter { it.parent_type == "1" }.size
         CulturalEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type == "1" })
 
 
@@ -37,7 +37,11 @@ class EDCultural : Fragment() {
             CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 4)
             CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationFour(App.instance.dip(4)))
         } else {
-            CulturalEventCategoryList.layoutManager = GridLayoutManager(context, 2)
+            val layoutManager = GridLayoutManager(context, 2)
+            layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int = if (itemCount % 2 == 1 && itemCount == position + 1) 2 else 1
+            }
+            CulturalEventCategoryList.layoutManager = layoutManager
             CulturalEventCategoryList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
         }
     }

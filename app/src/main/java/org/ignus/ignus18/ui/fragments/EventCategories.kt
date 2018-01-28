@@ -40,9 +40,8 @@ class EventCategories : Fragment() {
         return inflater.inflate(R.layout.frag_event_categories, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onResume() {
+        super.onResume()
 
         doAsync {
             Log.d("Suthar", "Before")
@@ -52,6 +51,7 @@ class EventCategories : Fragment() {
             uiThread {
                 loadCurrentFragment(cultural)
                 loading?.visibility = View.GONE
+                //setUpViewPager()
                 navigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
             }
         }
@@ -68,4 +68,37 @@ class EventCategories : Fragment() {
 
         Handler().post(mPendingRunnable)
     }
+
+    /*private fun setUpViewPager() {
+        val fm = fragmentManager ?: return
+        ec_pager.adapter = SectionsPagerAdapter(fm)
+        ec_pager.offscreenPageLimit = 2
+        ec_tabs.setupWithViewPager(ec_pager)
+    }
+
+    private inner class SectionsPagerAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+        // getItem is called to instantiate the fragment for the given page.
+        // Return a PlaceholderFragment (defined as a static inner class below).
+        override fun getItem(position: Int): Fragment{
+            return when(position){
+                0 -> cultural
+                1 -> technical
+                2 -> flagship
+                else -> cultural
+            }
+        }
+
+        override fun getCount(): Int = 3
+
+        override fun getPageTitle(position: Int): CharSequence {
+            return when (position) {
+                0 -> "Cultural"
+                1 -> "Technical"
+                2 -> "Flagship"
+                else -> "Error"
+            }
+        }
+    }*/
+
 }

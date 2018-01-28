@@ -26,17 +26,22 @@ class EDFlagship : Fragment() {
         return inflater.inflate(R.layout.frag_edflagship, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
 
+        val itemCount = Helper.eventCategories.filter { it.parent_type == "2" }.size
         FlagshipEventCategoryList.adapter = EventCategoryListAdapter(Helper.eventCategories.filter { it.parent_type == "2" })
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 4)
             FlagshipEventCategoryList.addItemDecoration(SpacesItemDecorationFour(App.instance.dip(4)))
         } else {
-            FlagshipEventCategoryList.layoutManager = GridLayoutManager(context, 2)
+            val layoutManager = GridLayoutManager(context, 2)
+            layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int = if (itemCount % 2 == 1 && itemCount == position + 1) 2 else 1
+            }
+            FlagshipEventCategoryList.layoutManager = layoutManager
             FlagshipEventCategoryList.addItemDecoration(SpacesItemDecorationTwo(App.instance.dip(4)))
         }
     }

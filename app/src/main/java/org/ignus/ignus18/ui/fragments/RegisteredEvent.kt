@@ -33,8 +33,8 @@ class RegisteredEvent : Fragment() {
         return inflater.inflate(R.layout.frag_registered_event, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
         getRegisteredEventList()
     }

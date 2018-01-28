@@ -34,6 +34,8 @@ class SpacesItemDecorationTwo(private val space: Int) : RecyclerView.ItemDecorat
         if (parent.getChildAdapterPosition(view) % 2 == 0) outRect.left = 2 * space
         else outRect.right = 2 * space
 
+        if (parent.adapter.itemCount % 2 == 1 && parent.adapter.itemCount == parent.getChildAdapterPosition(view) + 1)
+            outRect.right = 2 * space
     }
 }
 
